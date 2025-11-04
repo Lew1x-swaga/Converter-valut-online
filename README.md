@@ -1,2 +1,3 @@
 # Converter-valut-online
-Sophisticated and quite challenging exercise
+"Sophisticated and quite challenging exercise"
+Райцын Роман БИ-251
