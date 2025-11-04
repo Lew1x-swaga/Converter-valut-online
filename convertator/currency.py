@@ -54,12 +54,11 @@ class CurrencyData:
             raise Exception(f"Ошибка при получении данных: {str(e)}")
     
     def convert_curr(self, amount, from_curr, to_curr):
-        """Конвертация валюты"""
         if from_curr not in self.currencies or to_curr not in self.currencies:
             raise Exception("Неверный код валюты")
-        
         amount_in_rub = amount * self.currencies[from_curr]['rate']
         converted_amount = amount_in_rub / self.currencies[to_curr]['rate']
         
         return round(converted_amount, 3)
+
 
