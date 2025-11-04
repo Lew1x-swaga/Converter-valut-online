@@ -10,7 +10,6 @@ class CurrencyData:
         self.last_update = None
         
     def get_curr_rates(self):
-        """Получение актуальных курсов валют с сайта ЦБ РФ"""
         try:
             response = requests.get(self.url)
             response.encoding = 'utf-8'
@@ -63,3 +62,4 @@ class CurrencyData:
         converted_amount = amount_in_rub / self.currencies[to_curr]['rate']
         
         return round(converted_amount, 3)
+
