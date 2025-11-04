@@ -18,24 +18,21 @@ class CurrencyData:
             if response.status_code != 200:
                 raise Exception(f"Ошибка подключения: {response.status_code}")
             
-            # Парсим XML
             root = ET.fromstring(response.content)
             self.last_update = root.attrib['Date']
             
-            # Извлекаем данные о валютах 
             currencies_data = {}
             for valute in root.findall('Valute'):
                 try:
                     char_code = valute.find('CharCode').text
                     name = valute.find('Name').text
-                    
-                    # Безопасное получение значения
+
                     value_text = (valute.find('Value')).text if (valute.find('Value')).text is not None else "0"
                     value = float(value_text.replace(',', '.'))
                     
                     nominal = int((valute.find('Nominal')).text) if (valute.find('Nominal')).text is not None else 1
                     
-                    # Сохраняем курс за 1 единицу валюты
+
                     currencies_data[char_code] = {
                         'name': name,
                         'rate': value / nominal,
@@ -44,8 +41,7 @@ class CurrencyData:
                 except Exception as e: 
                     print(f"Ошибка при обработке валюты {char_code}: {e}")
                     continue
-            
-            # Добавляем российский рубль
+
             currencies_data['RUB'] = {
                 'name': 'Российский рубль',
                 'rate': 1.0,
@@ -63,7 +59,6 @@ class CurrencyData:
         if from_curr not in self.currencies or to_curr not in self.currencies:
             raise Exception("Неверный код валюты")
         
-        # Конвертируем через рубли (стандартный подход ЦБ)
         amount_in_rub = amount * self.currencies[from_curr]['rate']
         converted_amount = amount_in_rub / self.currencies[to_curr]['rate']
         
