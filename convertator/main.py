@@ -1,17 +1,14 @@
 import streamlit as st
 from currency import CurrencyData
 
-# Настройка страницы
 st.set_page_config(page_title="Конвертер валют", layout="wide")
 
-# Инициализация класса для работы с валютами
 @st.cache_resource
 def get_curr_data():    
     return CurrencyData()
 
 currency_data = get_curr_data()
 
-# Заголовок приложения
 st.title("Конвертер валют")
 
 try:
@@ -39,10 +36,8 @@ try:
         step=1.0
     )
     
-    # Кнопка конвертации
     convert_button = st.button("Конвертировать")
 
-    # Результат конвертации
     if convert_button:
         try:
             result = currency_data.convert_curr(amount, from_curr, to_curr)
