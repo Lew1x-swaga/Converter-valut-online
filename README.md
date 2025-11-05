@@ -1,3 +1,3 @@
 # Converter-valut-online
-og that was sophisticated and quite challenging exercise
+og that was mid ladder manace
 Райцын Роман БИ-251
